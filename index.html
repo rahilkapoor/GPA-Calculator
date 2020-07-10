@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+			crossorigin="anonymous"
+		/>
+
+		<link rel="stylesheet" type="text/css" href="index.css" />
+		<link rel="stylesheet" href="gpa.css" />
+		<link rel="shortcut icon" type="favicon" href="Darkelab.png" />
+
+		<title>GPA Calculator</title>
+	</head>
+	<body>
+		<section class="gpacalc">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h1>GPA Calculator</h1>
+					</div>
+					<div class="col-12 text-center">
+						<h1><span id="gpa">0.00</span></h1>
+					</div>
+					<div id="creds" class="col-6 col-sm-4 text-center">
+						<h2>Credits</h2>
+						<input type="number" max="25" min="0" id="cred1" />
+						<input type="number" max="25" min="0" id="cred2" />
+					</div>
+					<div id="grads" class="col-6 col-sm-4 text-center">
+						<h2>Grades</h2>
+						<input
+							type="text"
+							placeholder="O"
+							maxlength="2"
+							id="grad1"
+							class="entry"
+						/>
+						<input
+							type="text"
+							placeholder="A+"
+							maxlength="2"
+							id="grad2"
+							class="entry"
+						/>
+					</div>
+					<div class="col-12 text-center">
+						<input
+							type="submit"
+							value="Add More Fields"
+							onclick="disp()"
+							id="disp"
+						/>
+					</div>
+					<div class="col-12 text-center">
+						<input type="submit" value="Calculate" onclick="calc()" id="disp" />
+					</div>
+				</div>
+			</div>
+		</section>
+		<script>
+			var j = 3;
+			function disp() {
+				c = document.getElementById("creds");
+				g = document.getElementById("grads");
+
+				createforcred = document.createElement("input");
+				createforcred.setAttribute("type", "number");
+				createforcred.setAttribute("max", "25");
+				createforcred.setAttribute("min", "0");
+				createforcred.setAttribute("id", "cred" + j);
+
+				c.appendChild(createforcred);
+
+				createforgrad = document.createElement("input");
+				createforgrad.setAttribute("type", "text");
+				createforgrad.setAttribute("placeholder", "A+");
+				createforgrad.setAttribute("maxlength", "2");
+				createforgrad.setAttribute("class", "entry");
+				createforgrad.setAttribute("id", "grad" + j++);
+
+				g.appendChild(createforgrad);
+			}
+		</script>
+		<script>
+			function calc() {
+				var j = document.getElementsByClassName("entry").length;
+				var creds = [];
+				var grads = [];
+				var credsum = 0;
+				var totalsum = 0;
+				for (var i = 1; i <= j; i++) {
+					creds[i] = Number(document.getElementById("cred" + i).value);
+					credsum += creds[i];
+					var grad = document.getElementById("grad" + i).value;
+					switch (grad) {
+						case "O":
+							grads[i] = 10;
+							break;
+						case "o":
+							grads[i] = 10;
+							break;
+						case "A+":
+							grad[i] = 9;
+							break;
+						case "a+":
+							grads[i] = 9;
+							break;
+						case "A":
+							grads[i] = 8;
+							break;
+						case "a":
+							grads[i] = 8;
+							break;
+						case "B+":
+							grads[i] = 7;
+							break;
+						case "b+":
+							grads[i] = 7;
+							break;
+						case "B":
+							grads[i] = 6;
+							break;
+						case "b":
+							grads[i] = 6;
+							break;
+						case "C":
+							grads[i] = 5;
+							break;
+						case "c":
+							grads[i] = 5;
+							break;
+						case "P":
+							grads[i] = 4;
+							break;
+						case "p":
+							grads[i] = 4;
+							break;
+						case "f":
+							grads[i] = 0;
+							break;
+						case "F":
+							grads[i] = 0;
+							break;
+						case "ab":
+							grads[i] = 0;
+							break;
+						case "Ab":
+							grads[i] = 0;
+							break;
+						case "aB":
+							grads[i] = 0;
+							break;
+						case "AB":
+							grads[i] = 0;
+							break;
+						default:
+							grads[i] = 9;
+					}
+
+					totalsum += creds[i] * grads[i];
+				}
+				document.getElementById("gpa").innerHTML = totalsum / credsum;
+				document.documentElement.scrollTop = 0;
+				document.document.scrollTop = 0;
+			}
+		</script>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script
+			src="https://kit.fontawesome.com/ad9ffd444a.js"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+			integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
