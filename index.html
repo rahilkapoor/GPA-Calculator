@@ -170,7 +170,9 @@
 
 					totalsum += creds[i] * grads[i];
 				}
-				document.getElementById("gpa").innerHTML = totalsum / credsum;
+				var gpa = totalsum / credsum;
+				gpa = gpa.toFixed(2);
+				document.getElementById("gpa").innerHTML = gpa;
 				document.documentElement.scrollTop = 0;
 				document.document.scrollTop = 0;
 			}
